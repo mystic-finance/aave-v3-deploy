@@ -17,7 +17,7 @@ import {
 // ----------------
 
 export const CommonsConfig: ICommonConfiguration = {
-  MarketId: "Testnet Aave Market",
+  MarketId: "Mystic Market",
   ATokenNamePrefix: "Testnet",
   StableDebtTokenNamePrefix: "Testnet",
   VariableDebtTokenNamePrefix: "Testnet",

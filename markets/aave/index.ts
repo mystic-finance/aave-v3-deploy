@@ -24,7 +24,7 @@ import {
 
 export const AaveMarket: IAaveConfiguration = {
   ...CommonsConfig,
-  MarketId: "Ethereum Aave Market",
+  MarketId: "Ethereum Mystic Market",
   ATokenNamePrefix: "Ethereum",
   StableDebtTokenNamePrefix: "Ethereum",
   VariableDebtTokenNamePrefix: "Ethereum",

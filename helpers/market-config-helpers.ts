@@ -36,6 +36,7 @@ import {
 import { ZERO_ADDRESS } from "./constants";
 import { getTestnetReserveAddressFromSymbol, POOL_DATA_PROVIDER } from ".";
 import { ENABLE_REWARDS } from "./env";
+import PlumeConfig from "../markets/plume";
 
 declare var hre: HardhatRuntimeEnvironment;
 
@@ -52,6 +53,8 @@ export enum ConfigNames {
   Ethereum = "Ethereum",
   Base = "Base",
   baseGoerli = "base-goerli",
+  Plume = "Plume",
+  PlumeTestnet = "Plume-testnet",
 }
 
 export const getParamPerNetwork = <T>(
@@ -119,6 +122,10 @@ export const loadPoolConfig = (configName: ConfigNames): PoolConfiguration => {
       return EthereumV3Config;
     case ConfigNames.Base:
       return BaseConfig;
+    case ConfigNames.Plume:
+      return PlumeConfig;
+    case ConfigNames.PlumeTestnet:
+      return PlumeConfig;
     default:
       throw new Error(
         `Unsupported pool configuration: ${configName} is not one of the supported configs ${Object.values(
@@ -311,6 +318,7 @@ export const isProductionMarket = (
   const network = (
     process.env.FORK ? process.env.FORK : hre.network.name
   ) as eNetwork;
+  console.log(poolConfig.TestnetMarket, hre.config.networks[network]?.live);
 
   return hre.config.networks[network]?.live && !poolConfig.TestnetMarket;
 };

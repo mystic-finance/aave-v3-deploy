@@ -78,8 +78,8 @@ task(`upgrade-atokens`)
             asset,
             treasury,
             incentivesController,
-            name: `Aave ${ATokenNamePrefix} ${symbol}`,
-            symbol: `a${SymbolPrefix}${symbol}`,
+            name: `${ATokenNamePrefix} ${symbol}`,
+            symbol: `${SymbolPrefix}${symbol}`,
             implementation: newAtokenArtifact.address,
             params: [],
           })

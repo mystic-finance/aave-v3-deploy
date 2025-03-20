@@ -32,7 +32,9 @@ const func: DeployFunction = async function ({
 
   // Initialize implementation
   const poolConfig = await getPoolConfiguratorProxy(poolConfigArtifact.address);
-  await waitForTx(await poolConfig.initialize(addressesProviderAddress));
+  try {
+    await waitForTx(await poolConfig.initialize(addressesProviderAddress));
+  } catch {}
   console.log("Initialized PoolConfigurator Implementation");
 
   await deploy(RESERVES_SETUP_HELPER_ID, {

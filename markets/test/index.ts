@@ -25,7 +25,7 @@ import {
 
 export const AaveMarket: IAaveConfiguration = {
   ...CommonsConfig,
-  MarketId: "Testnet Aave Market",
+  MarketId: "Testnet Mystic Market",
   ProviderId: 8080,
   ReservesConfig: {
     AAVE: strategyAAVE,

@@ -20,7 +20,7 @@ export const HarmonyMarket: IAaveConfiguration = {
   ...AaveMarket,
   ProviderId: 31,
   WrappedNativeTokenSymbol: "WONE",
-  MarketId: "Harmony Aave Market",
+  MarketId: "Harmony Mystic Market",
   ATokenNamePrefix: "Harmony",
   StableDebtTokenNamePrefix: "Harmony",
   VariableDebtTokenNamePrefix: "Harmony",

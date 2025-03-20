@@ -24,7 +24,7 @@ import {
 // ----------------
 
 export const CommonsConfig: ICommonConfiguration = {
-  MarketId: "Commons Aave Market",
+  MarketId: "Commons Mystic Market",
   ATokenNamePrefix: "Ethereum",
   StableDebtTokenNamePrefix: "Ethereum",
   VariableDebtTokenNamePrefix: "Ethereum",

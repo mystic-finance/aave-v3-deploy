@@ -22,7 +22,7 @@ export const AvalancheMarket: IAaveConfiguration = {
   ...AaveMarket,
   ProviderId: 32,
   WrappedNativeTokenSymbol: "WAVAX",
-  MarketId: "Avalanche Aave Market",
+  MarketId: "Avalanche Mystic Market",
   ATokenNamePrefix: "Avalanche",
   StableDebtTokenNamePrefix: "Avalanche",
   VariableDebtTokenNamePrefix: "Avalanche",

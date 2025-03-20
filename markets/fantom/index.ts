@@ -23,7 +23,7 @@ export const FantomMarket: IAaveConfiguration = {
   ...AaveMarket,
   ProviderId: 33,
   WrappedNativeTokenSymbol: "WFTM",
-  MarketId: "Fantom Aave Market",
+  MarketId: "Fantom Mystic Market",
   ATokenNamePrefix: "Fantom",
   StableDebtTokenNamePrefix: "Fantom",
   VariableDebtTokenNamePrefix: "Fantom",

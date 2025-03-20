@@ -37,7 +37,7 @@
     "chai": "^4.3.4",
     "chalk": "^4.1.2",
     "dotenv": "^10.0.0",
-    "hardhat": "^2.17.4",
+    "hardhat": "^2.22.2",
     "hardhat-contract-sizer": "^2.0.3",
     "hardhat-dependency-compiler": "^1.1.2",
     "hardhat-deploy": "^0.10.6",
@@ -59,10 +59,11 @@
     "prepublish": "npm run clean && npm run compile && npm run build",
     "node": "npx hardhat node --no-deploy",
     "node:fork": "FORK=main npm run node --no-deploy",
-    "deploy": "if [ \"$SKIP_COMPILE\" = 'true' ]; then echo '[Warning] Skipping compilation'; else npm run compile; fi && npx hardhat deploy --no-compile",
+    "verify": "npx hardhat --network plume-testnet etherscan-verify --api-url 'https://testnet-explorer.plumenetwork.xyz' --api-key  abcdef",
+    "deploy": "if [ \"$SKIP_COMPILE\" = 'true' ]; then echo '[Warning] Skipping compilation'; else npm run compile; fi && npx hardhat deploy --no-compile --network plume",
     "test": "npm run compile && npm run test:fork",
     "test:fork": "MARKET_NAME=Aave FORK=main npx hardhat test ./tests/__setup.spec.ts ./tests/fork/check-list.spec.ts",
-    "deploy:market:aave:fork": "FORK=main MARKET_NAME=Aave npm run deploy",
+    "deploy:market:aave:fork": "FORK=main MARKET_NAME=Mystic npm run deploy",
     "deploy:market:eth:empty:fork": "FORK=main MARKET_NAME=Ethereum npm run deploy"
   },
   "peerDependencies": {

@@ -15,6 +15,7 @@ import {
   eOptimismNetwork,
   ePolygonNetwork,
   eBaseNetwork,
+  ePlumeNetwork,
 } from "./helpers/types";
 import { DEFAULT_NAMED_ACCOUNTS } from "./helpers/constants";
 
@@ -127,6 +128,11 @@ export default {
       eBaseNetwork.baseGoerli,
       84531
     ),
+    [ePlumeNetwork.plume]: getCommonNetworkConfig(ePlumeNetwork.plume, 98866),
+    [ePlumeNetwork.plumeTestnet]: getCommonNetworkConfig(
+      ePlumeNetwork.plumeTestnet,
+      98864
+    ),
   },
   namedAccounts: {
     ...DEFAULT_NAMED_ACCOUNTS,
@@ -215,6 +221,22 @@ export default {
         urls: {
           apiURL: "https://api.basescan.org/api",
           browserURL: "https://basescan.org/",
+        },
+      },
+      {
+        network: ePlumeNetwork.plume,
+        chainId: 98866,
+        urls: {
+          apiURL: "https://phoenix-explorer.plumenetwork.xyz/api?",
+          browserURL: "https://phoenix-explorer.plumenetwork.xyz",
+        },
+      },
+      {
+        network: ePlumeNetwork.plumeTestnet,
+        chainId: 98864,
+        urls: {
+          apiURL: "https://testnet-explorer.plumenetwork.xyz/api?",
+          browserURL: "https://testnet-explorer.plumenetwork.xyz",
         },
       },
     ],
