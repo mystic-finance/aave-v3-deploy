@@ -25,6 +25,7 @@ import "hardhat-contract-sizer";
 import "hardhat-dependency-compiler";
 import "@nomicfoundation/hardhat-chai-matchers";
 import "@nomiclabs/hardhat-etherscan";
+// import "@nomicfoundation/hardhat-verify";
 
 const SKIP_LOAD = process.env.SKIP_LOAD === "true";
 const TASK_FOLDERS = ["misc", "market-registry"];
@@ -213,7 +214,9 @@ export default {
     ? DETERMINISTIC_FACTORIES
     : undefined,
   etherscan: {
-    apiKey: ETHERSCAN_KEY,
+    apiKey: {
+      plume: "abcdabcd23",
+    },
     customChains: [
       {
         network: eBaseNetwork.base,
@@ -240,5 +243,8 @@ export default {
         },
       },
     ],
+    sourcify: {
+      enabled: false,
+    },
   },
 };
