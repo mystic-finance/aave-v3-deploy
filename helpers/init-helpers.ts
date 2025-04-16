@@ -233,6 +233,56 @@ export const initReservesByHelper = async (
   }
 };
 
+export const dropReservesByHelper = async (
+  reservesParams: iMultiPoolsAssets<IReserveParams>,
+  tokenAddresses: { [symbol: string]: tEthereumAddress },
+  admin: tEthereumAddress
+) => {
+  const poolConfig = (await loadPoolConfig(
+    MARKET_NAME as ConfigNames
+  )) as IAaveConfiguration;
+  const addressProviderArtifact = await hre.deployments.get(
+    POOL_ADDRESSES_PROVIDER_ID
+  );
+  const addressProvider = (
+    await hre.ethers.getContractAt(
+      addressProviderArtifact.abi,
+      addressProviderArtifact.address
+    )
+  ).connect(await hre.ethers.getSigner(admin)) as PoolAddressesProvider;
+
+  const poolArtifact = await hre.deployments.get(
+    isL2PoolSupported(poolConfig) ? L2_POOL_IMPL_ID : POOL_IMPL_ID
+  );
+
+  const reserves = Object.values(tokenAddresses);
+  console.log({ reserves });
+
+  const proxyArtifact = await hre.deployments.get(POOL_CONFIGURATOR_PROXY_ID);
+  const configuratorArtifact = await hre.deployments.get(
+    POOL_CONFIGURATOR_IMPL_ID
+  );
+  const configurator = (
+    await hre.ethers.getContractAt(
+      configuratorArtifact.abi,
+      proxyArtifact.address
+    )
+  ).connect(await hre.ethers.getSigner(admin)) as PoolConfigurator;
+
+  console.log(`- Reserves dropped in ${reserves.length} txs`);
+  for (let chunkIndex = 0; chunkIndex < reserves.length; chunkIndex++) {
+    console.log(reserves[chunkIndex]);
+    const tx = await waitForTx(
+      await configurator.dropReserve(reserves[chunkIndex])
+    );
+
+    console.log(
+      `  - Reserve dropped`,
+      `\n    - Tx hash: ${tx.transactionHash}`
+    );
+  }
+};
+
 export const getPairsTokenAggregator = (
   allAssetsAddresses: {
     [tokenSymbol: string]: tEthereumAddress;

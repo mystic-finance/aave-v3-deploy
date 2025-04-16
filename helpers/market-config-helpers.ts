@@ -181,6 +181,17 @@ export const savePoolTokens = async (
   });
 };
 
+export const deletePoolTokens = async (
+  reservesConfig: ITokenAddress,
+  dataProviderAddress: tEthereumAddress
+) => {
+  return Bluebird.each(Object.keys(reservesConfig), async (tokenSymbol) => {
+    await hre.deployments.delete(`${tokenSymbol}${ATOKEN_PREFIX}`);
+    await hre.deployments.delete(`${tokenSymbol}${VARIABLE_DEBT_PREFIX}`);
+    await hre.deployments.delete(`${tokenSymbol}${STABLE_DEBT_PREFIX}`);
+  });
+};
+
 export const getReserveAddresses = async (
   poolConfig: IBaseConfiguration,
   network: eNetwork
