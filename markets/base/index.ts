@@ -9,7 +9,7 @@ import {
 
 export const BaseConfig: IAaveConfiguration = {
   ...AaveMarket,
-  MarketId: "Base Aave Market",
+  MarketId: "Base Mystic Market",
   ATokenNamePrefix: "Base",
   StableDebtTokenNamePrefix: "Base",
   VariableDebtTokenNamePrefix: "Base",

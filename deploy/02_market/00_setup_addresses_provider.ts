@@ -33,7 +33,6 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   // 0. Check beforehand that all reserves have non-zero addresses
   const reserves = await getReserveAddresses(poolConfig, network);
-  console.log(reserves);
   const reservesConfig = poolConfig.ReservesConfig;
 
   const reserveConfigSymbols = Object.keys(reservesConfig);
@@ -82,10 +81,14 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   );
 
   // 3. Add AddressesProvider to Registry
-  await addMarketToRegistry(
-    poolConfig.ProviderId,
-    addressesProviderArtifact.address
-  );
+  try {
+    await addMarketToRegistry(
+      poolConfig.ProviderId,
+      addressesProviderArtifact.address
+    );
+  } catch (e) {
+    console.log(e);
+  }
 
   // 4. Deploy AaveProtocolDataProvider getters contract
   const protocolDataProvider = await deploy(POOL_DATA_PROVIDER, {

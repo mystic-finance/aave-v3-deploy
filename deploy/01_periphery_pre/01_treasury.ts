@@ -48,6 +48,7 @@ const func: DeployFunction = async function ({
     ReserveFactorTreasuryAddress,
     network
   );
+  console.log({ treasuryAddress });
   let treasuryOwner = POOL_ADMIN[network];
 
   if (isTestnetMarket(await loadPoolConfig(MARKET_NAME))) {
@@ -59,6 +60,7 @@ const func: DeployFunction = async function ({
       treasuryAddress,
       await getFirstSigner()
     );
+    const signer = await getFirstSigner();
     const controller = await treasuryContract.getFundsAdmin();
     const impl = await getProxyImplementationBySlot(treasuryAddress);
 
@@ -107,7 +109,12 @@ const func: DeployFunction = async function ({
   )) as AaveEcosystemReserveV2;
 
   // Call to initialize at implementation contract to prevent other calls.
-  await waitForTx(await treasuryImpl.initialize(ZERO_ADDRESS));
+
+  try {
+    await waitForTx(await treasuryImpl.initialize(ZERO_ADDRESS));
+  } catch (e) {
+    console.log(e);
+  }
 
   // Initialize proxy
   const proxy = (await hre.ethers.getContractAt(
@@ -120,13 +127,17 @@ const func: DeployFunction = async function ({
     [treasuryController.address]
   );
 
-  await waitForTx(
-    await proxy["initialize(address,address,bytes)"](
-      treasuryImplArtifact.address,
-      treasuryOwner,
-      initializePayload
-    )
-  );
+  try {
+    await waitForTx(
+      await proxy["initialize(address,address,bytes)"](
+        treasuryImplArtifact.address,
+        treasuryOwner,
+        initializePayload
+      )
+    );
+  } catch (e) {
+    console.log(e);
+  }
 
   return true;
 };

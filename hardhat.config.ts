@@ -15,6 +15,7 @@ import {
   eOptimismNetwork,
   ePolygonNetwork,
   eBaseNetwork,
+  ePlumeNetwork,
 } from "./helpers/types";
 import { DEFAULT_NAMED_ACCOUNTS } from "./helpers/constants";
 
@@ -24,6 +25,7 @@ import "hardhat-contract-sizer";
 import "hardhat-dependency-compiler";
 import "@nomicfoundation/hardhat-chai-matchers";
 import "@nomiclabs/hardhat-etherscan";
+// import "@nomicfoundation/hardhat-verify";
 
 const SKIP_LOAD = process.env.SKIP_LOAD === "true";
 const TASK_FOLDERS = ["misc", "market-registry"];
@@ -127,6 +129,11 @@ export default {
       eBaseNetwork.baseGoerli,
       84531
     ),
+    [ePlumeNetwork.plume]: getCommonNetworkConfig(ePlumeNetwork.plume, 98866),
+    [ePlumeNetwork.plumeTestnet]: getCommonNetworkConfig(
+      ePlumeNetwork.plumeTestnet,
+      98864
+    ),
   },
   namedAccounts: {
     ...DEFAULT_NAMED_ACCOUNTS,
@@ -207,7 +214,9 @@ export default {
     ? DETERMINISTIC_FACTORIES
     : undefined,
   etherscan: {
-    apiKey: ETHERSCAN_KEY,
+    apiKey: {
+      plume: "abcdabcd23",
+    },
     customChains: [
       {
         network: eBaseNetwork.base,
@@ -217,6 +226,25 @@ export default {
           browserURL: "https://basescan.org/",
         },
       },
+      {
+        network: ePlumeNetwork.plume,
+        chainId: 98866,
+        urls: {
+          apiURL: "https://phoenix-explorer.plumenetwork.xyz/api?",
+          browserURL: "https://phoenix-explorer.plumenetwork.xyz",
+        },
+      },
+      {
+        network: ePlumeNetwork.plumeTestnet,
+        chainId: 98864,
+        urls: {
+          apiURL: "https://testnet-explorer.plumenetwork.xyz/api?",
+          browserURL: "https://testnet-explorer.plumenetwork.xyz",
+        },
+      },
     ],
+    sourcify: {
+      enabled: false,
+    },
   },
 };

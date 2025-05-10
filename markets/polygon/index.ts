@@ -29,7 +29,7 @@ export const PolygonMarket: IAaveConfiguration = {
   ...AaveMarket,
   ProviderId: 34,
   WrappedNativeTokenSymbol: "WMATIC",
-  MarketId: "Polygon Aave Market",
+  MarketId: "Polygon Mystic Market",
   ATokenNamePrefix: "Polygon",
   StableDebtTokenNamePrefix: "Polygon",
   VariableDebtTokenNamePrefix: "Polygon",

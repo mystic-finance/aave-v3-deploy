@@ -189,11 +189,11 @@ export const initReservesByHelper = async (
       treasury: treasuryAddress,
       incentivesController,
       underlyingAssetName: reserveSymbols[i],
-      aTokenName: `Aave ${aTokenNamePrefix} ${reserveSymbols[i]}`,
-      aTokenSymbol: `a${symbolPrefix}${reserveSymbols[i]}`,
-      variableDebtTokenName: `Aave ${variableDebtTokenNamePrefix} Variable Debt ${reserveSymbols[i]}`,
+      aTokenName: `${aTokenNamePrefix} ${reserveSymbols[i]}`,
+      aTokenSymbol: `${symbolPrefix}${reserveSymbols[i]}`,
+      variableDebtTokenName: `${variableDebtTokenNamePrefix} Variable Debt ${reserveSymbols[i]}`,
       variableDebtTokenSymbol: `variableDebt${symbolPrefix}${reserveSymbols[i]}`,
-      stableDebtTokenName: `Aave ${stableDebtTokenNamePrefix} Stable Debt ${reserveSymbols[i]}`,
+      stableDebtTokenName: `${stableDebtTokenNamePrefix} Stable Debt ${reserveSymbols[i]}`,
       stableDebtTokenSymbol: `stableDebt${symbolPrefix}${reserveSymbols[i]}`,
       params: "0x10",
     });
@@ -228,6 +228,56 @@ export const initReservesByHelper = async (
 
     console.log(
       `  - Reserve ready for: ${chunkedSymbols[chunkIndex].join(", ")}`,
+      `\n    - Tx hash: ${tx.transactionHash}`
+    );
+  }
+};
+
+export const dropReservesByHelper = async (
+  reservesParams: iMultiPoolsAssets<IReserveParams>,
+  tokenAddresses: { [symbol: string]: tEthereumAddress },
+  admin: tEthereumAddress
+) => {
+  const poolConfig = (await loadPoolConfig(
+    MARKET_NAME as ConfigNames
+  )) as IAaveConfiguration;
+  const addressProviderArtifact = await hre.deployments.get(
+    POOL_ADDRESSES_PROVIDER_ID
+  );
+  const addressProvider = (
+    await hre.ethers.getContractAt(
+      addressProviderArtifact.abi,
+      addressProviderArtifact.address
+    )
+  ).connect(await hre.ethers.getSigner(admin)) as PoolAddressesProvider;
+
+  const poolArtifact = await hre.deployments.get(
+    isL2PoolSupported(poolConfig) ? L2_POOL_IMPL_ID : POOL_IMPL_ID
+  );
+
+  const reserves = Object.values(tokenAddresses);
+  console.log({ reserves });
+
+  const proxyArtifact = await hre.deployments.get(POOL_CONFIGURATOR_PROXY_ID);
+  const configuratorArtifact = await hre.deployments.get(
+    POOL_CONFIGURATOR_IMPL_ID
+  );
+  const configurator = (
+    await hre.ethers.getContractAt(
+      configuratorArtifact.abi,
+      proxyArtifact.address
+    )
+  ).connect(await hre.ethers.getSigner(admin)) as PoolConfigurator;
+
+  console.log(`- Reserves dropped in ${reserves.length} txs`);
+  for (let chunkIndex = 0; chunkIndex < reserves.length; chunkIndex++) {
+    console.log(reserves[chunkIndex]);
+    const tx = await waitForTx(
+      await configurator.dropReserve(reserves[chunkIndex])
+    );
+
+    console.log(
+      `  - Reserve dropped`,
       `\n    - Tx hash: ${tx.transactionHash}`
     );
   }

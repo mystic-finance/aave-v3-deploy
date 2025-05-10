@@ -15,7 +15,7 @@ import { strategySUSD } from "./reservesConfig";
 export const OptimisticConfig: IAaveConfiguration = {
   ...AaveMarket,
   ProviderId: 35,
-  MarketId: "Optimism Aave Market",
+  MarketId: "Optimism Mystic Market",
   ATokenNamePrefix: "Optimism",
   StableDebtTokenNamePrefix: "Optimism",
   VariableDebtTokenNamePrefix: "Optimism",

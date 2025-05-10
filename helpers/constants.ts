@@ -7,6 +7,7 @@ import {
   eFantomNetwork,
   eHarmonyNetwork,
   eOptimismNetwork,
+  ePlumeNetwork,
   ePolygonNetwork,
 } from "./types";
 
@@ -46,6 +47,8 @@ export const WRAPPED_NATIVE_TOKEN_PER_NETWORK: { [network: string]: string } = {
   [eFantomNetwork.main]: "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
   [eHarmonyNetwork.main]: "0xcF664087a5bB0237a0BAd6742852ec6c8d69A27a",
   [ePolygonNetwork.polygon]: "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+  [ePlumeNetwork.plume]: "0xEa237441c92CAe6FC17Caaf9a7acB3f953be4bd1",
+  [ePlumeNetwork.plumeTestnet]: "0x22d6672f7282F67Ce20d8Dafe30C6f012a219558",
 };
 
 export const ZERO_BYTES_32 =
@@ -100,6 +103,8 @@ export const chainlinkAggregatorProxy: Record<string, string> = {
   goerli: "0x60E4B131f0F219c72b0346675283E73888e4AB24",
   [eArbitrumNetwork.goerliNitro]: "0xC09e69E79106861dF5d289dA88349f10e2dc6b5C",
   [eEthereumNetwork.sepolia]: "0x6c60d915c7a646860dba836ffcb7f112b6cfdc76",
+  [ePlumeNetwork.plumeTestnet]: "0x76E2882488Bb9992B81e22A292902b659F14da9c",
+  [ePlumeNetwork.plume]: "0x0D9154F5453dCb0a271D9FF415Abc085d7B03b6c",
 };
 
 export const chainlinkEthUsdAggregatorProxy: Record<string, string> = {
@@ -123,6 +128,8 @@ export const chainlinkEthUsdAggregatorProxy: Record<string, string> = {
   goerli: "0x60E4B131f0F219c72b0346675283E73888e4AB24",
   [eArbitrumNetwork.goerliNitro]: "0xC09e69E79106861dF5d289dA88349f10e2dc6b5C",
   [eEthereumNetwork.sepolia]: "0x6c60d915c7a646860dba836ffcb7f112b6cfdc76",
+  [ePlumeNetwork.plumeTestnet]: "0x76E2882488Bb9992B81e22A292902b659F14da9c",
+  [ePlumeNetwork.plume]: "0xBDCF5dcd60F967C2f8c79AFD1CE7C9F1A11f9f04",
 };
 
 export const ETHEREUM_SHORT_EXECUTOR =
@@ -142,6 +149,8 @@ export const POOL_ADMIN: Record<string, string> = {
   [eBaseNetwork.base]: "0xA9F30e6ED4098e9439B2ac8aEA2d3fc26BcEbb45",
   [eBaseNetwork.baseGoerli]: "0xA9F30e6ED4098e9439B2ac8aEA2d3fc26BcEbb45",
   [eEthereumNetwork.tenderly]: ETHEREUM_SHORT_EXECUTOR,
+  [ePlumeNetwork.plume]: "0x18E1EEC9Fa5D77E472945FE0d48755386f28443c",
+  [ePlumeNetwork.plumeTestnet]: "0x18E1EEC9Fa5D77E472945FE0d48755386f28443c",
 };
 
 export const EMERGENCY_ADMIN: Record<string, string> = {
@@ -152,6 +161,8 @@ export const EMERGENCY_ADMIN: Record<string, string> = {
   [eOptimismNetwork.main]: "0xE50c8C619d05ff98b22Adf991F17602C774F785c",
   [ePolygonNetwork.polygon]: "0x1450F2898D6bA2710C98BE9CAF3041330eD5ae58",
   [eEthereumNetwork.main]: ETHEREUM_SHORT_EXECUTOR,
+  [ePlumeNetwork.plume]: "0x18E1EEC9Fa5D77E472945FE0d48755386f28443c",
+  [ePlumeNetwork.plumeTestnet]: "0x18E1EEC9Fa5D77E472945FE0d48755386f28443c",
 };
 
 export const DEFAULT_NAMED_ACCOUNTS = {

@@ -59,7 +59,9 @@ const func: DeployFunction = async function ({
 
   // Initialize implementation
   const pool = await getPool(poolArtifact.address);
-  await waitForTx(await pool.initialize(addressesProviderAddress));
+  try {
+    await waitForTx(await pool.initialize(addressesProviderAddress));
+  } catch {}
   console.log("Initialized L2Pool Implementation");
 };
 

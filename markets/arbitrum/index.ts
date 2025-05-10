@@ -14,7 +14,7 @@ import {
 
 export const ArbitrumConfig: IAaveConfiguration = {
   ...AaveMarket,
-  MarketId: "Arbitrum Aave Market",
+  MarketId: "Arbitrum Mystic Market",
   ATokenNamePrefix: "Arbitrum",
   StableDebtTokenNamePrefix: "Arbitrum",
   VariableDebtTokenNamePrefix: "Arbitrum",

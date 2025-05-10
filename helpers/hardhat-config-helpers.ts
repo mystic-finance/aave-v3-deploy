@@ -12,6 +12,7 @@ import {
   eFantomNetwork,
   eOptimismNetwork,
   eBaseNetwork,
+  ePlumeNetwork,
 } from "./types";
 
 require("dotenv").config();
@@ -27,6 +28,7 @@ export const FORK_BLOCK_NUMBER = process.env.FORK_BLOCK_NUMBER
   : 0;
 const MNEMONIC_PATH = "m/44'/60'/0'/0";
 const MNEMONIC = process.env.MNEMONIC || "";
+const PRIVATE_KEY = process.env.PRIVATE_KEY || "";
 
 export const getAlchemyKey = (net: eNetwork) => {
   switch (net) {
@@ -98,6 +100,8 @@ export const NETWORKS_RPC_URL: iParamsPerNetwork<string> = {
   [eBaseNetwork.base]: `https://base-mainnet.g.alchemy.com/v2/${getAlchemyKey(
     eBaseNetwork.base
   )}`,
+  [ePlumeNetwork.plumeTestnet]: "https://test-rpc.plumenetwork.xyz",
+  [ePlumeNetwork.plume]: "https://phoenix-rpc.plumenetwork.xyz",
 };
 
 export const LIVE_NETWORKS: iParamsPerNetwork<boolean> = {
@@ -109,6 +113,8 @@ export const LIVE_NETWORKS: iParamsPerNetwork<boolean> = {
   [eFantomNetwork.main]: true,
   [eOptimismNetwork.main]: true,
   [eBaseNetwork.base]: true,
+  [ePlumeNetwork.plume]: true,
+  [ePlumeNetwork.plumeTestnet]: true,
 };
 
 const GAS_PRICE_PER_NET: iParamsPerNetwork<string | number> = {
@@ -156,6 +162,9 @@ export const getCommonNetworkConfig = (
       initialIndex: 0,
       count: 10,
     },
+  }),
+  ...(PRIVATE_KEY && {
+    accounts: [PRIVATE_KEY as string],
   }),
   live: LIVE_NETWORKS[networkName] || false,
 });
