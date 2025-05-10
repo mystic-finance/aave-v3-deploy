@@ -132,11 +132,8 @@ Please be aware that [Aave V3](https://github.com/aave/aave-v3-core) is under [B
 
 ## Scope
 
-- helpers/constants.ts
-- helpers/hardhat-config-helpers.ts
-- helpers/init-helpers.ts
 - helpers/market-config-helpers.ts
+- helpers/init-helpers.ts
 - markets/plume/index.ts
 - tasks/misc/delist-new-tokens.ts
 - tasks/misc/list-new-tokens.ts
-- tasks/misc/upgrade-atokens.ts

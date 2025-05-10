@@ -1,14 +1,14 @@
 /** PM2 Config file */
 
 /**
- * @deployment Dropping of Tokens
+ * @deployment Listing of Tokens
  * @description This config file allows to deploy UiPoolDataProvider contract at
  *              multiple networks and distributed in parallel processes.
  */
 
 const commons = {
   script: "npx",
-  args: "hardhat drop-tokens",
+  args: "hardhat setup-e-modes",
   restart_delay: 100000000000,
   autorestart: false,
 };
@@ -16,7 +16,7 @@ const commons = {
 module.exports = {
   apps: [
     {
-      name: "plume-drop-tokens",
+      name: "setup-e-modes",
       env: {
         HARDHAT_NETWORK: "plume",
       },

@@ -18,7 +18,7 @@ module.exports = {
     {
       name: "plume-new-tokens",
       env: {
-        HARDHAT_NETWORK: "plume-testnet",
+        HARDHAT_NETWORK: "plume",
       },
       ...commons,
     },

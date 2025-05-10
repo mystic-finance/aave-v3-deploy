@@ -59,14 +59,15 @@
     "prepublish": "npm run clean && npm run compile && npm run build",
     "node": "npx hardhat node --no-deploy",
     "node:fork": "FORK=main npm run node --no-deploy",
-    "verify": "npx hardhat verify --network plume 0xa576002f209C9F81DaC7A25A88Ab103335569851 \"0x0D9154F5453dCb0a271D9FF415Abc085d7B03b6c\" \"0xBDCF5dcd60F967C2f8c79AFD1CE7C9F1A11f9f04\"",
+    "verify": "npx hardhat verify --network plume 0xc7571009141B0f0d1f619953467371972d243C96 \"0x0D9154F5453dCb0a271D9FF415Abc085d7B03b6c\" \"0xBDCF5dcd60F967C2f8c79AFD1CE7C9F1A11f9f04\"",
     "deploy": "if [ \"$SKIP_COMPILE\" = 'true' ]; then echo '[Warning] Skipping compilation'; else npm run compile; fi && npx hardhat deploy --no-compile --network plume",
     "test": "npm run compile && npm run test:fork",
     "test:fork": "MARKET_NAME=Aave FORK=main npx hardhat test ./tests/__setup.spec.ts ./tests/fork/check-list.spec.ts",
     "deploy:market:aave:fork": "FORK=main MARKET_NAME=Mystic npm run deploy",
     "deploy:market:eth:empty:fork": "FORK=main MARKET_NAME=Ethereum npm run deploy",
     "list:tokens:plume": "npx hardhat list-new-tokens --network plume",
-    "drop:tokens:plume": "npx hardhat drop-tokens --network plume"
+    "drop:tokens:plume": "npx hardhat drop-tokens --network plume",
+    "setup:emode": "npx hardhat setup-e-modes --network plume"
   },
   "peerDependencies": {
     "@aave/core-v3": "x || >=1.0.0-beta || >=3.0.0-beta",
